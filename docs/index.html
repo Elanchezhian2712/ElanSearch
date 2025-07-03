@@ -132,7 +132,7 @@
   <main class="container mt-4">
     <div class="card shadow-sm mb-4" id="add-task-panel">
       <div class="card-body p-4">
-        <form id="todo-form" class="row g-3">
+        <form id="todo-form" class="row g-3 rounded-4 shadow-lg">
           <div class="col-12 col-md-4">
             <label for="title" class="form-label small fw-semibold">Task Title</label>
             <input type="text" id="title" class="form-control" placeholder="e.g., Deploy to production" required />
@@ -169,7 +169,7 @@
 
     const supabase = createClient(
       'https://eqnjxjevzheekychzwus.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5...your_key_here...'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxbmp4amV2emhlZWt5Y2h6d3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1Mzg0NzUsImV4cCI6MjA2NzExNDQ3NX0.ls15Lc6usmTUU9P6GMxLyum0W-N-nxBqKaWQ11_5Q9o'
     );
 
     const form = document.getElementById("todo-form");
