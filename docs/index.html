@@ -14,7 +14,7 @@
   <style>
     body {
       font-family: 'Sora', sans-serif;
-      background-color: #f8f9fa; /* Lighter grey background */
+      background-color: #f8f9fa;
       padding-top: 5rem;
     }
 
@@ -74,7 +74,7 @@
 
     .task-card .card-text {
         font-size: 0.9rem;
-        white-space: pre-wrap; /* Handles multi-line descriptions */
+        white-space: pre-wrap;
         word-break: break-word;
         flex-grow: 1;
         margin-bottom: 0;
@@ -84,6 +84,11 @@
     .card-footer {
         background-color: transparent;
         border-top: 1px solid #f1f3f5;
+    }
+
+    /* --- NEW ---: Hover effect for the clickable link icon */
+    .link-icon-anchor:hover .fa-link {
+        color: var(--bs-primary) !important;
     }
 
     .edit-form-body {
@@ -123,7 +128,10 @@
                 ${task.link ? `
                     <div class="mt-auto pt-3">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-link fa-xs text-muted"></i></span>
+                            <!-- --- UPDATED: The span is now a clickable anchor tag --- -->
+                            <a href="${task.link}" target="_blank" rel="noopener noreferrer" title="Open link in new tab" class="input-group-text bg-light border-end-0 link-icon-anchor">
+                                <i class="fas fa-link fa-xs text-muted"></i>
+                            </a>
                             <input type="text" class="form-control bg-light border-start-0" value="${task.link}" readonly>
                             <button class="btn btn-outline-secondary" onclick="copyLink(this, '${task.link}')">Copy</button>
                         </div>
@@ -158,8 +166,6 @@
       const linkInput = card.querySelector(".input-group input");
       const link = linkInput ? linkInput.value : "";
 
-      // Replace the card's content with an edit form.
-      // The cancel button has a class `cancel-edit-btn` instead of an onclick attribute.
       card.innerHTML = `
         <div class="card-body edit-form-body">
           <form class="w-100">
@@ -174,7 +180,6 @@
         </div>
       `;
 
-      // Attach event listener to the submit button (via form)
       card.querySelector("form").addEventListener("submit", async (e) => {
         e.preventDefault();
         const { error } = await supabase.from("todos").update({
@@ -187,9 +192,8 @@
         loadTodos();
       });
 
-      // ***FIX: Attach event listener to the new cancel button***
       card.querySelector(".cancel-edit-btn").addEventListener("click", () => {
-        loadTodos(); // This correctly calls the function within scope to cancel editing.
+        loadTodos();
       });
     };
 
