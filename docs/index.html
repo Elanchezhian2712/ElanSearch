@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <title>Elan Task Manager</title>
@@ -12,144 +12,205 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* --- NEUMORPHIC THEME VARIABLES --- */
     :root {
-      --bs-body-bg-rgb: 248, 249, 250;
+      /* Light Theme (for completeness) */
+      --bg-color: #e4e9f2;
+      --card-bg: #e4e9f2;
+      --text-color: #333942;
+      --text-color-muted: #888;
+      --accent-color: #6f42c1;
+      --danger-color: #d93b3b;
+      --shadow-light: #ffffff;
+      --shadow-dark: #c4c9d3;
     }
 
     [data-bs-theme="dark"] {
-      --bs-body-bg-rgb: 33, 37, 41;
-      --bs-tertiary-bg: #2b3035;
-      --bs-border-color: #495057;
-      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      /* Dark Theme (from image) */
+      --bg-color: #26282B;
+      --card-bg: #31353a;
+      --text-color: #e2e2e2;
+      --text-color-muted: #8e9297;
+      --accent-color: #9b81e8;
+      --danger-color: #e54b4b;
+      --shadow-light: #3a3e43;
+      --shadow-dark: #202224;
     }
 
+    /* --- BASE STYLES --- */
     body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
       font-family: 'Sora', sans-serif;
-      background-color: rgb(var(--bs-body-bg-rgb));
-      padding-top: 5rem;
-      transition: background-color 0.3s ease;
+      padding: 1.5rem 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* --- LAYOUT & NAVBAR --- */
     .navbar {
-      background-color: var(--bs-tertiary-bg, #ffffff);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-      border-bottom: 1px solid var(--bs-border-color-translucent);
+      background: transparent;
+      padding: 0;
+      margin-bottom: 2rem;
     }
 
-    #add-task-panel {
-      border-radius: 0.75rem;
+    /* --- NEUMORPHIC COMPONENTS --- */
+    #add-task-panel,
+    .task-card {
+      background: var(--card-bg);
+      border-radius: 1.25rem;
       border: none;
-      background-color: var(--bs-tertiary-bg, #ffffff);
+      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .form-control,
+    .task-card .description-field,
+    .link-group {
+      background: var(--bg-color);
+      border: none;
+      border-radius: 0.75rem;
+      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+      color: var(--text-color);
+    }
+    
+    .form-control {
+      padding: 0.75rem 1rem;
     }
 
-    .form-control, .btn {
-      border-radius: 0.5rem;
+    .form-control::placeholder {
+      color: var(--text-color-muted);
     }
 
+    /* --- BUTTONS --- */
+    .btn {
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: all 0.15s ease-in-out;
+    }
+
+    #add-task-panel .btn,
+    .edit-form-buttons .btn {
+      background: var(--card-bg);
+      color: var(--text-color);
+      box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+    }
+
+    #add-task-panel .btn:active,
+    .edit-form-buttons .btn:active {
+      transform: scale(0.97);
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    }
+
+    #add-task-panel .btn-primary {
+      color: var(--accent-color);
+    }
+    
+    /* Subtle action buttons on cards */
+    .card-actions .btn {
+      background: transparent;
+      box-shadow: none;
+      color: var(--text-color-muted);
+    }
+    .card-actions .btn:hover {
+      color: var(--text-color);
+    }
+
+    /* --- SPECIFIC COMPONENT STYLING --- */
     .grid-container {
       display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
-
-    .task-card {
-      background-color: var(--bs-tertiary-bg, #ffffff);
-      border-radius: 0.75rem;
-      border: 1px solid var(--bs-border-color-translucent);
-      box-shadow: var(--card-shadow, 0 2px 8px rgba(0, 0, 0, 0.04));
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .task-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--card-shadow-hover, 0 8px 20px rgba(0, 0, 0, 0.08));
-    }
-
-    .task-card .card-body {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1.25rem;
-    }
-
-    .card-text {
-      font-size: 0.9rem;
+    
+    .task-card .description-field {
+      padding: 0.75rem;
       white-space: pre-wrap;
-      word-break: break-word;
+      word-break: break-all;
+      color: var(--text-color-muted);
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 0.9em;
+    }
+
+    .link-group {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      overflow: hidden;
+    }
+    .link-group > * {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    .link-group .link-icon {
+      padding: 0.5rem 1rem;
+      color: var(--text-color-muted);
+    }
+    .link-group .link-icon:hover {
+        color: var(--accent-color);
+    }
+    .link-group .link-text {
       flex-grow: 1;
-      color: var(--bs-secondary-color);
+      padding: 0.5rem 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-color-muted);
+    }
+    .link-group .copy-btn {
+      padding: 0.5rem 1rem;
+      color: var(--text-color);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .link-group .copy-btn:hover {
+        color: var(--accent-color);
     }
 
-    .card-footer {
-      background-color: transparent;
-      border-top: 1px solid var(--bs-border-color-translucent);
-    }
-
-    .link-icon-anchor:hover .fa-link {
-      color: var(--bs-primary) !important;
-    }
-
-    @media (max-width: 576px) {
-      .navbar .d-flex {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-      }
-
-      .navbar .form-control-sm {
-        width: 100% !important;
-      }
-
-      .navbar .dropdown {
-        align-self: flex-end;
-      }
-    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
+  <header class="container">
+    <nav class="navbar">
       <a class="navbar-brand fw-bold" href="#"><i class="fas fa-tasks me-2"></i>Elan Tasks</a>
-      <div class="d-flex align-items-center ms-auto w-100 w-md-auto gap-2">
-        <input id="search" class="form-control form-control-sm me-2" type="search" placeholder="Search tasks..." />
+      <div class="d-flex align-items-center ms-auto gap-3">
+        <input id="search" class="form-control form-control-sm" type="search" placeholder="Search tasks..." />
         <div class="dropdown">
-          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" id="bd-theme" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+          <button class="btn btn-sm dropdown-toggle d-flex align-items-center" id="bd-theme" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
             <svg class="bi theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+            <span class="ms-2">Theme</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><button class="dropdown-item" data-bs-theme-value="light"><svg class="bi me-2"><use href="#sun-fill"></use></svg>Light</button></li>
-            <li><button class="dropdown-item" data-bs-theme-value="dark"><svg class="bi me-2"><use href="#moon-stars-fill"></use></svg>Dark</button></li>
-            <li><button class="dropdown-item active" data-bs-theme-value="auto"><svg class="bi me-2"><use href="#circle-half"></use></svg>System</button></li>
+            <li><button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"><svg class="bi me-2" width="1em" height="1em"><use href="#sun-fill"></use></svg>Light</button></li>
+            <li><button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"><svg class="bi me-2" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>Dark</button></li>
+            <li><button class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><svg class="bi me-2" width="1em" height="1em"><use href="#circle-half"></use></svg>System</button></li>
           </ul>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <main class="container mt-4">
-    <div class="card shadow-sm mb-4" id="add-task-panel">
-      <div class="card-body p-4">
-        <form id="todo-form" class="row g-3 rounded-4 shadow-lg">
-          <div class="col-12 col-md-4">
-            <label for="title" class="form-label small fw-semibold">Task Title</label>
-            <input type="text" id="title" class="form-control" placeholder="e.g., Deploy to production" required />
-          </div>
-          <div class="col-12 col-md-4">
-            <label for="description" class="form-label small fw-semibold">Description</label>
-            <input type="text" id="description" class="form-control" placeholder="Add details..." />
-          </div>
-          <div class="col-12 col-md-3">
-            <label for="link" class="form-label small fw-semibold">Optional Link</label>
-            <input type="url" id="link" class="form-control" placeholder="https://..." />
-          </div>
-          <div class="col-12 col-md-1 d-grid">
-            <button type="submit" class="btn btn-primary mt-md-4">Add</button>
-          </div>
-        </form>
-      </div>
+  <main class="container">
+    <div id="add-task-panel" class="p-4 mb-5">
+      <form id="todo-form" class="row g-3 align-items-end">
+        <div class="col-12 col-md-4">
+          <label for="title" class="form-label small fw-semibold">Task Title</label>
+          <input type="text" id="title" class="form-control" placeholder="e.g., Deploy to production" required />
+        </div>
+        <div class="col-12 col-md-4">
+          <label for="description" class="form-label small fw-semibold">Description</label>
+          <input type="text" id="description" class="form-control" placeholder="Add details..." />
+        </div>
+        <div class="col-12 col-md-3">
+          <label for="link" class="form-label small fw-semibold">Optional Link</label>
+          <input type="url" id="link" class="form-control" placeholder="https://..." />
+        </div>
+        <div class="col-12 col-md-1 d-grid">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
     </div>
 
     <div id="task-list" class="grid-container"></div>
@@ -157,20 +218,64 @@
 
   <!-- SVG Icons for Theme -->
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></symbol>
     <symbol id="circle-half" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1v14z"/></symbol>
     <symbol id="moon-stars-fill" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858A7.208 7.208 0 0 0 5.202 4.596C5.202 8.617 8.48 11.873 12.52 11.873c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893 8.349 8.349 0 0 1-6.488 3.078C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></symbol>
-    <symbol id="sun-fill" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></symbol>
   </svg>
 
   <!-- App & Theme Script -->
   <script type="module">
+    // Bootstrap Theme Switcher Logic
+    (() => {
+      'use strict'
+      const getStoredTheme = () => localStorage.getItem('theme')
+      const setStoredTheme = theme => localStorage.setItem('theme', theme)
+      const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme()
+        if (storedTheme) { return storedTheme }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      }
+      const setTheme = theme => {
+        if (theme === 'auto') {
+          document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+        } else {
+          document.documentElement.setAttribute('data-bs-theme', theme)
+        }
+      }
+      setTheme(getPreferredTheme())
+      const showActiveTheme = (theme) => {
+        const activeThemeIcon = document.querySelector('.theme-icon-active use')
+        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+        const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
+        document.querySelectorAll('[data-bs-theme-value]').forEach(element => { element.classList.remove('active') })
+        btnToActive.classList.add('active')
+        activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!getStoredTheme() || getStoredTheme() === 'auto') {
+          setTheme(getPreferredTheme())
+          showActiveTheme(getPreferredTheme())
+        }
+      })
+      window.addEventListener('DOMContentLoaded', () => {
+        showActiveTheme(getPreferredTheme())
+        document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
+          toggle.addEventListener('click', () => {
+            const theme = toggle.getAttribute('data-bs-theme-value')
+            setStoredTheme(theme)
+            setTheme(theme)
+            showActiveTheme(theme)
+          })
+        })
+      })
+    })()
+
+    // Your application logic
     import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
     const supabase = createClient(
-      'https://eqnjxjevzheekychzwus.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxbmp4amV2emhlZWt5Y2h6d3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1Mzg0NzUsImV4cCI6MjA2NzExNDQ3NX0.ls15Lc6usmTUU9P6GMxLyum0W-N-nxBqKaWQ11_5Q9o'
-    );
+     'https://eqnjxjevzheekychzwus.supabase.co',
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxbmp4amV2emhlZWt5Y2h6d3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1Mzg0NzUsImV4cCI6MjA2NzExNDQ3NX0.ls15Lc6usmTUU9P6GMxLyum0W-N-nxBqKaWQ11_5Q9o');
 
     const form = document.getElementById("todo-form");
     const taskList = document.getElementById("task-list");
@@ -179,69 +284,63 @@
 
     const loadTodos = async () => {
       const { data } = await supabase.from("todos").select("*").order("created_at", { ascending: false });
-      allTasks = data;
+      allTasks = data || [];
       renderTodos(allTasks);
     };
 
     const renderTodos = tasks => {
       taskList.innerHTML = tasks.map(task => `
-        <div class="task-card" data-id="${task.id}">
-          <div class="card-body">
-            <h5 class="card-title mb-2">${task.title}</h5>
-            <pre class="card-text">${task.description || ''}</pre>
-            ${task.link ? `
-              <div class="mt-auto pt-3">
-                <div class="input-group input-group-sm">
-                  <a href="${task.link}" target="_blank" class="input-group-text bg-body-secondary border-end-0 link-icon-anchor"><i class="fas fa-link fa-xs text-muted"></i></a>
-                  <input type="text" class="form-control bg-body-secondary border-start-0" value="${task.link}" readonly>
-                  <button class="btn btn-outline-secondary" onclick="copyLink(this, '${task.link}')">Copy</button>
-                </div>
-              </div>` : ''}
+        <div class="task-card p-4" data-id="${task.id}">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <h5 class="card-title fw-bold mb-0 me-3">${task.title}</h5>
+            <div class="card-actions d-flex gap-2 flex-shrink-0">
+              <button class="btn btn-sm" onclick="editTask('${task.id}')" title="Edit Task"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm" onclick="deleteTask('${task.id}')" title="Delete Task"><i class="fas fa-trash" style="color: var(--danger-color);"></i></button>
+            </div>
           </div>
-          <div class="card-footer d-flex justify-content-end gap-2">
-            <button class="btn btn-sm btn-light" onclick="editTask('${task.id}')"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-sm btn-light text-danger" onclick="deleteTask('${task.id}')"><i class="fas fa-trash"></i></button>
-          </div>
+          <div class="description-field mb-3">${task.description || ' '}</div>
+          ${task.link ? `
+            <div class="link-group">
+              <a href="${task.link}" target="_blank" class="link-icon" title="Open Link"><i class="fas fa-link fa-sm"></i></a>
+              <div class="link-text small">${task.link}</div>
+              <button class="copy-btn small" onclick="copyLink(this, '${task.link}')">Copy</button>
+            </div>` : ''}
         </div>
       `).join('');
     };
 
     form.addEventListener("submit", async e => {
       e.preventDefault();
-      const title = form.title.value.trim();
-      const description = form.description.value.trim();
-      const link = form.link.value.trim();
-      if (!title) return;
-
-      await supabase.from("todos").insert([{ title, description, link }]);
+      const { title, description, link } = e.target.elements;
+      if (!title.value.trim()) return;
+      await supabase.from("todos").insert([{ 
+        title: title.value.trim(), 
+        description: description.value.trim(), 
+        link: link.value.trim() 
+      }]);
       form.reset();
-
-      // Wait briefly before fetching new data
-      setTimeout(() => loadTodos(), 300);
+      loadTodos();
     });
-
 
     window.editTask = async (id) => {
       const card = document.querySelector(`[data-id="${id}"]`);
-      const title = card.querySelector(".card-title").innerText;
-      const description = card.querySelector(".card-text").innerText;
-      const linkInput = card.querySelector("input[type='text']");
-      const link = linkInput?.value || "";
+      const task = allTasks.find(t => t.id == id);
+      if (!task) return;
+      
       card.innerHTML = `
-        <div class="card-body p-3">
-          <form class="w-100">
-            <input type="text" class="form-control mb-2" name="title" value="${title}" required />
-            <textarea class="form-control mb-2" name="description" rows="4">${description}</textarea>
-            <input type="url" class="form-control mb-2" name="link" value="${link}" />
-            <div class="d-flex justify-content-end gap-2 mt-2">
-              <button type="submit" class="btn btn-success btn-sm">Save</button>
-              <button type="button" class="btn btn-secondary btn-sm cancel-edit-btn">Cancel</button>
-            </div>
-          </form>
-        </div>`;
+        <form class="w-100 p-2">
+          <input type="text" class="form-control mb-2" name="title" value="${task.title}" placeholder="Task Title" required />
+          <textarea class="form-control mb-2" name="description" rows="3" placeholder="Description...">${task.description || ''}</textarea>
+          <input type="url" class="form-control mb-2" name="link" value="${task.link || ''}" placeholder="https://..." />
+          <div class="d-flex justify-content-end gap-2 mt-3 edit-form-buttons">
+            <button type="submit" class="btn btn-sm">Save</button>
+            <button type="button" class="btn btn-sm cancel-edit-btn">Cancel</button>
+          </div>
+        </form>`;
+      
       card.querySelector("form").addEventListener("submit", async (e) => {
         e.preventDefault();
-        const { title, description, link } = e.target;
+        const { title, description, link } = e.target.elements;
         await supabase.from("todos").update({
           title: title.value.trim(),
           description: description.value.trim(),
@@ -260,12 +359,12 @@
 
     window.copyLink = (btn, link) => {
       navigator.clipboard.writeText(link).then(() => {
-        const original = btn.innerHTML;
+        const originalText = btn.innerText;
         btn.innerText = "Copied!";
-        btn.classList.add("btn-success", "text-white");
+        btn.style.color = 'var(--accent-color)';
         setTimeout(() => {
-          btn.innerHTML = original;
-          btn.classList.remove("btn-success", "text-white");
+            btn.innerText = originalText;
+            btn.style.color = '';
         }, 2000);
       });
     };
