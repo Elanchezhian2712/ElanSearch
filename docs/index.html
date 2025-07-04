@@ -12,163 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* --- NEUMORPHIC THEME VARIABLES --- */
-    :root {
-      /* Light Theme (for completeness) */
-      --bg-color: #e4e9f2;
-      --card-bg: #e4e9f2;
-      --text-color: #333942;
-      --text-color-muted: #888;
-      --accent-color: #6f42c1;
-      --danger-color: #d93b3b;
-      --shadow-light: #ffffff;
-      --shadow-dark: #c4c9d3;
-    }
-
-    [data-bs-theme="dark"] {
-      /* Dark Theme (from image) */
-      --bg-color: #26282B;
-      --card-bg: #31353a;
-      --text-color: #e2e2e2;
-      --text-color-muted: #8e9297;
-      --accent-color: #9b81e8;
-      --danger-color: #e54b4b;
-      --shadow-light: #3a3e43;
-      --shadow-dark: #202224;
-    }
-
-    /* --- BASE STYLES --- */
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Sora', sans-serif;
-      padding: 1.5rem 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* --- LAYOUT & NAVBAR --- */
-    .navbar {
-      background: transparent;
-      padding: 0;
-      margin-bottom: 2rem;
-    }
-
-    /* --- NEUMORPHIC COMPONENTS --- */
-    #add-task-panel,
-    .task-card {
-      background: var(--card-bg);
-      border-radius: 1.25rem;
-      border: none;
-      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-      transition: all 0.3s ease-in-out;
-    }
-    
-    .form-control,
-    .task-card .description-field,
-    .link-group {
-      background: var(--bg-color);
-      border: none;
-      border-radius: 0.75rem;
-      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
-      color: var(--text-color);
-    }
-    
-    .form-control {
-      padding: 0.75rem 1rem;
-    }
-
-    .form-control::placeholder {
-      color: var(--text-color-muted);
-    }
-
-    /* --- BUTTONS --- */
-    .btn {
-      border: none;
-      border-radius: 0.75rem;
-      font-weight: 600;
-      transition: all 0.15s ease-in-out;
-    }
-
-    #add-task-panel .btn,
-    .edit-form-buttons .btn {
-      background: var(--card-bg);
-      color: var(--text-color);
-      box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
-    }
-
-    #add-task-panel .btn:active,
-    .edit-form-buttons .btn:active {
-      transform: scale(0.97);
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-    }
-
-    #add-task-panel .btn-primary {
-      color: var(--accent-color);
-    }
-    
-    /* Subtle action buttons on cards */
-    .card-actions .btn {
-      background: transparent;
-      box-shadow: none;
-      color: var(--text-color-muted);
-    }
-    .card-actions .btn:hover {
-      color: var(--text-color);
-    }
-
-    /* --- SPECIFIC COMPONENT STYLING --- */
-    .grid-container {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    .task-card .description-field {
-      padding: 0.75rem;
-      white-space: pre-wrap;
-      word-break: break-all;
-      color: var(--text-color-muted);
-      max-height: 150px;
-      overflow-y: auto;
-      font-size: 0.9em;
-    }
-
-    .link-group {
-      display: flex;
-      align-items: center;
-      padding: 0;
-      overflow: hidden;
-    }
-    .link-group > * {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-    }
-    .link-group .link-icon {
-      padding: 0.5rem 1rem;
-      color: var(--text-color-muted);
-    }
-    .link-group .link-icon:hover {
-        color: var(--accent-color);
-    }
-    .link-group .link-text {
-      flex-grow: 1;
-      padding: 0.5rem 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-color-muted);
-    }
-    .link-group .copy-btn {
-      padding: 0.5rem 1rem;
-      color: var(--text-color);
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .link-group .copy-btn:hover {
-        color: var(--accent-color);
-    }
-
+    /* --- Styles are unchanged, so they are omitted here for brevity --- */
+    /* --- You can just copy your existing styles over --- */
+    :root { --bg-color: #e4e9f2; --card-bg: #e4e9f2; --text-color: #333942; --text-color-muted: #888; --accent-color: #6f42c1; --danger-color: #d93b3b; --shadow-light: #ffffff; --shadow-dark: #c4c9d3; } [data-bs-theme="dark"] { --bg-color: #26282B; --card-bg: #31353a; --text-color: #e2e2e2; --text-color-muted: #8e9297; --accent-color: #9b81e8; --danger-color: #e54b4b; --shadow-light: #3a3e43; --shadow-dark: #202224; } body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Sora', sans-serif; padding: 1.5rem 0; transition: background-color 0.3s ease, color 0.3s ease; } .navbar { background: transparent; padding: 0; margin-bottom: 2rem; } #add-task-panel, .task-card { background: var(--card-bg); border-radius: 1.25rem; border: none; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); transition: all 0.3s ease-in-out; } .form-control, .task-card .description-field, .link-group { background: var(--bg-color); border: none; border-radius: 0.75rem; box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light); color: var(--text-color); } .form-control { padding: 0.75rem 1rem; } .form-control::placeholder { color: var(--text-color-muted); } .btn { border: none; border-radius: 0.75rem; font-weight: 600; transition: all 0.15s ease-in-out; } #add-task-panel .btn, .edit-form-buttons .btn { background: var(--card-bg); color: var(--text-color); box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light); } #add-task-panel .btn:active, .edit-form-buttons .btn:active { transform: scale(0.97); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); } #add-task-panel .btn-primary { color: var(--accent-color); } .card-actions .btn { background: transparent; box-shadow: none; color: var(--text-color-muted); } .card-actions .btn:hover { color: var(--text-color); } .grid-container { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } .task-card .description-field { padding: 0.75rem; white-space: pre-wrap; word-break: break-all; color: var(--text-color-muted); max-height: 150px; overflow-y: auto; font-size: 0.9em; } .link-group { display: flex; align-items: center; padding: 0; overflow: hidden; } .link-group > * { background: transparent; border: none; box-shadow: none; } .link-group .link-icon { padding: 0.5rem 1rem; color: var(--text-color-muted); } .link-group .link-icon:hover { color: var(--accent-color); } .link-group .link-text { flex-grow: 1; padding: 0.5rem 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-color-muted); } .link-group .copy-btn { padding: 0.5rem 1rem; color: var(--text-color); font-weight: 600; cursor: pointer; } .link-group .copy-btn:hover { color: var(--accent-color); }
   </style>
 </head>
 <body>
@@ -188,10 +34,13 @@
             <li><button class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><svg class="bi me-2" width="1em" height="1em"><use href="#circle-half"></use></svg>System</button></li>
           </ul>
         </div>
+        <!-- NEW: Logout Button -->
+        <button id="logout-btn" class="btn btn-sm">Logout</button>
       </div>
     </nav>
   </header>
 
+  <!-- The rest of your HTML body is the same -->
   <main class="container">
     <div id="add-task-panel" class="p-4 mb-5">
       <form id="todo-form" class="row g-3 align-items-end">
@@ -215,79 +64,96 @@
 
     <div id="task-list" class="grid-container"></div>
   </main>
-
-  <!-- SVG Icons for Theme -->
+  
+  <!-- SVG Icons are the same -->
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="circle-half" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1v14z"/></symbol>
     <symbol id="moon-stars-fill" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858A7.208 7.208 0 0 0 5.202 4.596C5.202 8.617 8.48 11.873 12.52 11.873c.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893 8.349 8.349 0 0 1-6.488 3.078C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></symbol>
     <symbol id="sun-fill" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></symbol>
   </svg>
 
-  <!-- App & Theme Script -->
   <script type="module">
-    // Bootstrap Theme Switcher Logic
-    (() => {
-      'use strict'
-      const getStoredTheme = () => localStorage.getItem('theme')
-      const setStoredTheme = theme => localStorage.setItem('theme', theme)
-      const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme()
-        if (storedTheme) { return storedTheme }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      }
-      const setTheme = theme => {
-        if (theme === 'auto') {
-          document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
-        } else {
-          document.documentElement.setAttribute('data-bs-theme', theme)
-        }
-      }
-      setTheme(getPreferredTheme())
-      const showActiveTheme = (theme) => {
-        const activeThemeIcon = document.querySelector('.theme-icon-active use')
-        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-        const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
-        document.querySelectorAll('[data-bs-theme-value]').forEach(element => { element.classList.remove('active') })
-        btnToActive.classList.add('active')
-        activeThemeIcon.setAttribute('href', svgOfActiveBtn)
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (!getStoredTheme() || getStoredTheme() === 'auto') {
-          setTheme(getPreferredTheme())
-          showActiveTheme(getPreferredTheme())
-        }
-      })
-      window.addEventListener('DOMContentLoaded', () => {
-        showActiveTheme(getPreferredTheme())
-        document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
-          toggle.addEventListener('click', () => {
-            const theme = toggle.getAttribute('data-bs-theme-value')
-            setStoredTheme(theme)
-            setTheme(theme)
-            showActiveTheme(theme)
-          })
-        })
-      })
-    })()
+    // Theme switcher logic is unchanged and can be copied from your original file
+    (() => { 'use strict'; const getStoredTheme = () => localStorage.getItem('theme'); const setStoredTheme = theme => localStorage.setItem('theme', theme); const getPreferredTheme = () => { const storedTheme = getStoredTheme(); if (storedTheme) { return storedTheme } return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' }; const setTheme = theme => { if (theme === 'auto') { document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) } else { document.documentElement.setAttribute('data-bs-theme', theme) } }; setTheme(getPreferredTheme()); const showActiveTheme = (theme) => { const activeThemeIcon = document.querySelector('.theme-icon-active use'); const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`); const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href'); document.querySelectorAll('[data-bs-theme-value]').forEach(element => { element.classList.remove('active') }); btnToActive.classList.add('active'); activeThemeIcon.setAttribute('href', svgOfActiveBtn); }; window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if (!getStoredTheme() || getStoredTheme() === 'auto') { setTheme(getPreferredTheme()); showActiveTheme(getPreferredTheme()) } }); window.addEventListener('DOMContentLoaded', () => { showActiveTheme(getPreferredTheme()); document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => { toggle.addEventListener('click', () => { const theme = toggle.getAttribute('data-bs-theme-value'); setStoredTheme(theme); setTheme(theme); showActiveTheme(theme) }) }) }) })();
 
-    // Your application logic
+    // ===================================
+    //  MODIFIED APPLICATION LOGIC
+    // ===================================
     import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
     const supabase = createClient(
-     'https://eqnjxjevzheekychzwus.supabase.co',
-'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxbmp4amV2emhlZWt5Y2h6d3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1Mzg0NzUsImV4cCI6MjA2NzExNDQ3NX0.ls15Lc6usmTUU9P6GMxLyum0W-N-nxBqKaWQ11_5Q9o');
+      'https://eqnjxjevzheekychzwus.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxbmp4amV2emhlZWt5Y2h6d3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1Mzg0NzUsImV4cCI6MjA2NzExNDQ3NX0.ls15Lc6usmTUU9P6GMxLyum0W-N-nxBqKaWQ11_5Q9o'
+    );
+
+    // NEW: Check user session and protect the page
+    let currentUser;
+    supabase.auth.onAuthStateChange((event, session) => {
+        if (!session) {
+            window.location.href = 'login.html';
+        } else {
+            currentUser = session.user;
+            console.log('Logged in as:', currentUser.email);
+            loadTodos(); // Load todos for the logged-in user
+        }
+    });
 
     const form = document.getElementById("todo-form");
     const taskList = document.getElementById("task-list");
     const searchInput = document.getElementById("search");
+    const logoutBtn = document.getElementById("logout-btn"); // NEW
     let allTasks = [];
 
+    // MODIFIED: loadTodos now fetches data for the current user
     const loadTodos = async () => {
-      const { data } = await supabase.from("todos").select("*").order("created_at", { ascending: false });
+      // Don't run if the user isn't loaded yet
+      if (!currentUser) return;
+      
+      const { data, error } = await supabase
+        .from("todos")
+        .select("*")
+        // No .eq() filter needed here because RLS handles it automatically!
+        .order("created_at", { ascending: false });
+
+      if (error) {
+          console.error('Error loading todos:', error.message);
+          return;
+      }
       allTasks = data || [];
       renderTodos(allTasks);
     };
 
+    // MODIFIED: form submission automatically includes the user_id via the DB default
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const { title, description, link } = e.target.elements;
+      if (!title.value.trim()) return;
+      
+      // The user_id is now added automatically by the database default value `auth.uid()`
+      const { error } = await supabase.from("todos").insert([{ 
+        title: title.value.trim(), 
+        description: description.value.trim(), 
+        link: link.value.trim() 
+        // No need to pass user_id here, DB handles it!
+      }]);
+
+      if (error) {
+          console.error('Error adding task:', error.message);
+      } else {
+          form.reset();
+          loadTodos();
+      }
+    });
+
+    // NEW: Logout functionality
+    logoutBtn.addEventListener('click', async () => {
+        await supabase.auth.signOut();
+    });
+
+
+    // The rest of the functions (renderTodos, editTask, deleteTask, etc.) are UNCHANGED
+    // as our RLS policies handle the security on the backend.
+    
     const renderTodos = tasks => {
       taskList.innerHTML = tasks.map(task => `
         <div class="task-card p-4" data-id="${task.id}">
@@ -308,19 +174,6 @@
         </div>
       `).join('');
     };
-
-    form.addEventListener("submit", async e => {
-      e.preventDefault();
-      const { title, description, link } = e.target.elements;
-      if (!title.value.trim()) return;
-      await supabase.from("todos").insert([{ 
-        title: title.value.trim(), 
-        description: description.value.trim(), 
-        link: link.value.trim() 
-      }]);
-      form.reset();
-      loadTodos();
-    });
 
     window.editTask = async (id) => {
       const card = document.querySelector(`[data-id="${id}"]`);
@@ -378,7 +231,6 @@
       renderTodos(filtered);
     });
 
-    loadTodos();
   </script>
 </body>
 </html>
