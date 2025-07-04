@@ -100,10 +100,6 @@
         <button type="submit" class="btn btn-lg">Login</button>
       </div>
     </form>
-    
-    <div class="text-center mt-4 small">
-      <p>Don't have an account? <a href="#" id="show-signup" class="fw-bold text-decoration-none" style="color: var(--accent-color)">Sign Up</a></p>
-    </div>
   </div>
 
   <script type="module">
@@ -164,11 +160,7 @@
             submitBtn.textContent = 'Sign Up';
             formTitle.textContent = 'Create a new account';
             showSignupLink.innerHTML = 'Already have an account? <span class="fw-bold">Login</span>';
-        } else {
-            submitBtn.textContent = 'Login';
-            formTitle.textContent = 'Sign in to continue';
-            showSignupLink.innerHTML = 'Don\'t have an account? <span class="fw-bold">Sign Up</span>';
-        }
+        } 
     });
   </script>
 </body>
